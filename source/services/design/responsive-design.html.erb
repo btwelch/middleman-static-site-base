@@ -1,0 +1,90 @@
+---
+changefreq: "weekly"
+priority: 0.7
+menu_title: "Responsive Design"
+sitemap_exclude: false
+---
+
+<%# content_for :header_sub do %>
+  <%# Do nothing %>
+<%# end %>
+
+<% content_for :page_title do %>
+  Responsive Design | <%= config.website_name %>
+<% end %>
+
+<% content_for(:page_description, "") %>
+
+<div>
+  <h1>
+    Responsive Design
+  </h1>
+
+  <div>
+    <hr>
+    
+    <h2>
+      So, you want a website that uses responsive design so it looks good on desktop and mobile devices, huh?
+    </h2>
+
+    <br/>
+    
+    <p>
+      So, you've probably heard that responsive design means that your website is user-friendly on desktop browsers and on iPhones and Androids, but did you also know that there's an SEO benefit? Having your web-pages render nicely in mobile mode for the Google bot means that you likely rank higher than similar websites who don't render as well on mobile browsers. There are also other benefits, such as having a more modern look as most websites that are designed to be responsive share a basic asthetic that makes them seem modern and sleek. We can create a beautiful website for you that is both responsive and cost-effective, and we can turn it around really fast.
+	</p>
+    
+    <br/>
+
+<!--
+    <p>
+      <%= partial "shared/testimonial", :locals => { :image => "/images/android.png", :text => "#{your_name} has been managing our ad spend for the last 3 years, and he's done a phenomenal job of making sure we get the most for our advertising dollars.", :who => "Jeddadiah Friendworthy" } %>
+    </p>
+
+    <br/>
+ -->
+
+    <p>
+      <h2>Our Playbook</h2>
+
+      <ul>
+        <li>Modern Frameworks</li>
+        <li>Custom Design OR Templates (shown)</li>
+        <li>Content Review</li>
+        <li>Copywriting (if necessary)</li>
+        <li>Asset Compression, Minification</li>
+        <li>Basic SEO</li>
+      </ul>
+
+      <br/>
+
+      <h2>We Insist On</h2>
+
+      <ul>
+        <li>Modern Frameworks like Bootstrap or Foundation</li>
+        <li>Analytics code on every page</li>
+        <li>Use of static build tools where possible</li>
+      </ul>
+
+      <br/>
+
+      <h2>What You Get</h2>
+
+      <ul>
+        <li>Beautiful Responsive Website</li>
+        <li>Good Page Copy</li>
+        <li>Small, Fast Page Loads</li>
+        <li>SEO-Ready Setup</li>
+      </ul>
+    </p>
+
+    <br/>
+
+    <p>
+      We would love to build you a responsive website, and if you're ready to make that investment, why not start a conversation with us to move you closer to your goals. Lets get you started today.
+      <br/>
+      <h3>Call anytime at: <%= config.business_phone %></h3>
+      or email: <%= config.business_email %>
+    </p>
+ 
+  </div>
+</div>

@@ -1,0 +1,219 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+
+  <meta name="robots" content="index,follow" /> 
+  <meta name="location" content="<%= config.business_meta_location %>" /> 
+  <meta name="rating" content="General" /> 
+
+  <title>
+    <%= yield_content :page_title %>
+  </title>
+
+  <meta name="description" content="<%= content_for?(:page_description) ? yield_content(:page_description) : config.website_description %>" />
+  <meta property="og:description" content="<%= content_for?(:page_description) ? yield_content(:page_description) : config.website_description %>">
+
+  <meta name="keywords" content="<%= config.website_keywords %>" />
+
+  <meta property="og:site_name" content="<%= config.website_name %>">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= config.website_url_with_protocol %>">
+
+  <meta property="og:title" content="<%= yield_content :page_title %>">
+  <meta property="og:locale" content="<%= config.website_locale %>">
+
+  <meta name="twitter:title" content="<%= yield_content :page_title %>">
+  <meta name="twitter:site" content="@sleep">
+
+  <% css_path = sitemap.resources.select { |p| p.source_file.match(/all[.]css$/) }.first %>
+  <style type='text/css'>
+    <%= css_path.render %>
+    .dropdown-submenu{position:relative;}
+    .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+    .dropdown-submenu:hover>.dropdown-menu{display:block;}
+    .dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+    .dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
+    .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+  </style>
+</head>
+
+<body>
+
+  <%= partial "shared/navbar" %>
+
+  <%= yield %>
+
+  <footer>
+    <% if content_for?(:footer) %>
+      <%= yield_content :footer %> 
+    <% else %>
+      <div class="container">
+        <div class="row">
+          <div class='signoff'>
+            <%= config.website_copyright %>
+            <br/>
+            <a href="/privacy.html" title="" tooltip="">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </footer>
+
+  <%= config.olark_code %>
+
+</body>
+
+<% js_path = sitemap.resources.select { |p| p.source_file.match(/all[.]js$/) }.first %>
+<script type='text/javascript'>
+<%= js_path.render %>
+</script>
+
+<script type='text/javascript'>
+VideoTimer = null;
+Video = function() {
+
+	//Default clips for the videos
+	this.clips = [
+		['bike', 9900],
+		['kidshouse', 9900]
+
+	];
+
+	this.settings = {
+		'videoContainer': $('#backgroundVideo'),
+		'stagingContainer': $('#stagingVideo'),
+		'videoWebM': $('#backgroundVideoWebM'),
+		'videoMp4': $('#backgroundVideoMp4'),
+		'stagingWebM': $('#stagingVideoWebM'),
+		'stagingMp4': $('#stagingVideoMp4'),
+		'supportedTypeExt': 'webm'
+	};
+
+	this.currentClip = 2;
+
+	this.shuffle = function() {
+		for (var i = Video.clips.length - 1; i > 0; i--) {
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = Video.clips[i];
+			Video.clips[i] = Video.clips[j];
+			Video.clips[j] = temp;
+		}
+
+		return this;
+	};
+
+	this.throwFullScreen = function() {
+		var browserHeight = $(window).height(),
+			browserWidth = $(window).width(),
+			videoHeight = 1280,
+			videoWidth = 1920,
+			videoRatio = videoWidth / videoHeight,
+			scaleWidth = browserWidth / videoWidth,
+			scaleHeight = browserHeight / videoHeight,
+			scale = scaleHeight > scaleWidth ? scaleHeight : scaleWidth,
+			fullScreenWidth = scale * videoWidth,
+			fullScreenHeight = scale * videoHeight;
+
+		if(scaleWidth > scaleHeight) {
+			Video.settings.videoContainer.css('width', '100%');
+			Video.settings.videoContainer.css('height', 'auto');
+			Video.settings.stagingContainer.css('width', '100%');
+			Video.settings.stagingContainer.css('height', 'auto');  
+		}
+		else {
+			//Video.settings.videoContainer.css('height', '100%');
+			Video.settings.videoContainer.css('width', '100%');
+			//Video.settings.stagingContainer.css('height', '100%');
+			Video.settings.stagingContainer.css('width', '100%'); 
+		}
+		
+		$('#videoContainer').animate({opacity:1}, 2000);
+	}
+
+	this.stopVideo = function() {
+		clearTimeout(VideoTimer);
+		Video.settings.stagingContainer[0].pause();
+		Video.settings.videoContainer[0].pause();
+	}
+
+	this.buildInitialVideo = function() {
+		if(Video.settings.videoContainer[0].canPlayType('video/webm')) {
+			Video.settings.supportedType = '.webm';
+			Video.settings.videoContainer.attr('type', 'video/webm;codecs=\'vp8\'');
+		}
+		else {
+			Video.settings.supportedType = '.mp4';
+			Video.settings.videoContainer.attr('type', 'video/mp4;codecs=\'avc1.42E01E, mp4a.40.2\'');
+		}
+
+		Video.shuffle();
+
+		Video.settings.videoContainer.attr('src', 'images/' + Video.clips[0][0] + Video.settings.supportedType);
+		Video.settings.videoContainer[0].load();
+
+		Video.settings.stagingContainer.attr('src', 'images/' + Video.clips[1][0] + Video.settings.supportedType);
+		Video.settings.stagingContainer[0].load();
+		Video.settings.stagingContainer[0].pause();
+
+		VideoTimer = window.setTimeout(function() {
+			console.log('looping');
+			Video.loop();
+		}, Video.clips[0][1]);
+
+		return true;
+	}
+
+	this.loop = function() {
+		VideoTimer = null;
+
+		var nextClip = Video.clips[1][0],
+			currentTime = Video.clips[1][1];
+
+		if(!Video.clips[Video.currentClip + 1]) {
+			Video.currentClip = 1;
+			nextClip = Video.clips[1][0];
+			currentTime = Video.clips[Video.clips.length - 1][1];
+		}
+		else {
+			nextClip = Video.clips[Video.currentClip + 1][0];
+			currentTime = Video.clips[Video.currentClip][1];
+		}
+
+		if(Video.settings.videoContainer.css('opacity') == 0) {
+			Video.settings.videoContainer[0].play();
+			Video.settings.videoContainer.animate({'opacity':1}, 150, function() {
+				Video.settings.stagingContainer.animate({'opacity': 0}, 0);
+				Video.settings.stagingContainer.attr('src', 'images/' + nextClip + Video.settings.supportedType);
+				Video.settings.stagingContainer[0].load();
+				Video.settings.stagingContainer[0].pause();
+			});
+		}
+		else {
+			Video.settings.stagingContainer[0].play();
+			Video.settings.stagingContainer.animate({'opacity':1}, 150, function() {
+				Video.settings.videoContainer.animate({'opacity': 0}, 0);
+				Video.settings.videoContainer.attr('src', 'images/' + nextClip + Video.settings.supportedType);
+				Video.settings.videoContainer[0].load();
+				Video.settings.videoContainer[0].pause();
+			});
+		}
+		Video.currentClip++;
+
+		VideoTimer = window.setTimeout(function() {
+			Video.loop();
+		}, currentTime);
+	};
+};
+</script>	
+
+
+<%= yield_content :video_settings %>
+
+<%= config.adroll_code %>
+
+<%= config.analytics_code %>
+
+</html>

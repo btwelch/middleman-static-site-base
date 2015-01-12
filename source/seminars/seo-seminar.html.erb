@@ -1,0 +1,53 @@
+---
+changefreq: "weekly"
+priority: 0.6
+menu_title: "SEO Seminar"
+sitemap_exclude: false
+---
+
+<% content_for :page_title do %>
+  SEO Fundamentals Seminar | <%= config.website_name %>
+<% end %>
+
+<div>
+  <h1>
+    SEO Fundamentals Seminar
+  </h1>
+
+  <div>
+    <hr>
+    <h2>
+      "Where can I learn more about SEO to increase traffic to my business website?"
+    </h2>
+
+    <br/>
+
+    <p>
+      Come join us for a 2-hour class (held every few months) to explore the high-level concepts behind SEO, and learn the basics of generating high-quality content that Search Engines will love.
+    </p>
+
+    <br/>
+
+    <h2>Next Class</h2>
+
+    <br/>
+
+    <% event = get_upcoming_event_details_for_type(CustomHelpers.EVENT_TYPE_SEO_SEMINAR) %>
+
+    <% if event && event[:start_date] %>
+      <p>    
+        <%= partial "event_details", :locals => { :event => event } %>
+      </p>
+
+      <br/>
+
+      <p>    
+        <%= partial "event_registration", :locals => { :event => event } %>
+      </p>
+    <% else %>
+      <p>
+        No classes scheduled
+      </p>
+    <% end %>
+  </div>
+</div>

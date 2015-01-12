@@ -1,0 +1,58 @@
+---
+changefreq: "weekly"
+priority: 0.6
+menu_title: "Business Seminars"
+sitemap_exclude: false
+---
+
+<% content_for :page_title do %>
+  Business Seminars | <%= config.website_name %>
+<% end %>
+
+<div>
+  <h1>
+    Business Seminars
+  </h1>
+
+  <div>
+    <hr>
+
+    <p>
+      Come join us for these 2-hour seminars covering the use of web technology to grow your business. There will be time for questions and 1:1 help. Held every month.
+    </p>
+
+    <br/>
+
+    <h2>
+      Upcoming Seminars
+    </h2>
+
+    <br/>
+
+  	<% 
+  	   events = Array.new
+  	   event = get_upcoming_event_details_for_type(CustomHelpers.EVENT_TYPE_SEO_SEMINAR)
+       events << event unless !event[:start_date]
+  	   event = get_upcoming_event_details_for_type(CustomHelpers.EVENT_TYPE_GOOGLE_ADS_SEMINAR)
+       events << event unless !event[:start_date]
+  	   event = get_upcoming_event_details_for_type(CustomHelpers.EVENT_TYPE_WEB_MARKETING_SEMINAR)
+       events << event unless !event[:start_date]
+  	   event = get_upcoming_event_details_for_type(CustomHelpers.EVENT_TYPE_WEBSITE_SEMINAR)
+       events << event unless !event[:start_date]
+
+       events.sort!{|e1, e2| e1[:start_date] <=> e2[:start_date]} 
+    %>
+
+    <% events.each do |event| %>
+      <p>    
+        <%= partial "event_details", :locals => { :event => event } %>
+      </p>
+      <p>    
+        <%= partial "event_registration", :locals => { :event => event } %>
+      </p>
+      <br/>
+      <br/>
+    <% end %>
+
+  </div>
+</div>

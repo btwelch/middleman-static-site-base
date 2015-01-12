@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+
+    <meta name="robots" content="index,follow" /> 
+    <meta name="location" content="<%= config.business_meta_location %>" /> 
+    <meta name="rating" content="General" /> 
+
+    <title>
+      <%= yield_content :page_title %>
+    </title>
+
+    <meta name="description" content="<%= content_for?(:page_description) ? yield_content(:page_description) : config.website_description %>" />
+    <meta property="og:description" content="<%= content_for?(:page_description) ? yield_content(:page_description) : config.website_description %>">
+
+    <meta name="keywords" content="<%= config.website_keywords %>" />
+
+    <meta property="og:site_name" content="<%= config.website_name %>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= config.website_url_with_protocol %>">
+
+    <meta property="og:title" content="<%= yield_content :page_title %>">
+    <meta property="og:locale" content="<%= config.website_locale %>">
+
+<!--    <meta name="twitter:url" content="https://www.airbnb.com/">
+    <meta name="twitter:description" content="Discover amazing, unique accommodations in 190 countries. With more than 15 million nights booked worldwide, Airbnb is the world leader in travel rentals.">
+    <meta name="twitter:card" content="summary">
+-->
+    <meta name="twitter:title" content="<%= yield_content :page_title %>">
+    <meta name="twitter:site" content="@sleep">
+
+    <%#
+      <meta property="fb:app_id" content="">
+      <meta name="twitter:app:name:iphone" content="Airbnb">
+      <meta name="twitter:app:name:ipad" content="Airbnb">
+      <meta name="twitter:app:name:googleplay" content="Airbnb">
+      <meta name="twitter:app:id:iphone" content="401626263">
+      <meta name="twitter:app:id:ipad" content="401626263">
+      <meta name="twitter:app:id:googleplay" content="com.airbnb.android">
+      <meta name="twitter:app:url:iphone" content="airbnb://">
+      <meta name="twitter:app:url:ipad" content="airbnb://">
+      <meta name="twitter:app:url:googleplay" content="airbnb://">
+    %>
+
+    <!--[if lt IE 9]>
+    <script src="./assets/html5.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <%#
+      <script type='text/javascript'>
+        var cb = function() {
+          var l = document.createElement('link'); 
+          l.rel = 'stylesheet';
+          l.href = '/stylesheets/all.css';
+
+          var s = document.createElement('script'); 
+          s.src = "/javascripts/all.js";
+
+          var h = document.getElementsByTagName('head')[0];
+          h.parentNode.insertBefore(l, h);
+          h.parentNode.insertBefore(s, h);
+        };
+        
+        var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+            webkitRequestAnimationFrame || msRequestAnimationFrame;
+        if (raf) raf(cb);
+        else window.addEventListener('load', cb);
+      </script>
+    %>
+
+    <% css_path = sitemap.resources.select { |p| p.source_file.match(/all[.]css$/) }.first %>
+    <style type='text/css'>
+      <%= css_path.render %>
+
+      .dropdown-submenu{position:relative;}
+      .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+      .dropdown-submenu:hover>.dropdown-menu{display:block;}
+      .dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+      .dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
+      .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+    </style>
+  </head>
+  <body>
+    <div>
+
+      <% if content_for?(:header_sub) %>
+        <%= yield_content :header_sub %> 
+      
+      <% elsif false %>
+        <header id="masthead">
+          <div class='container'>
+            <div class='row'>
+              <div class='col-md-12'>
+                <div class='col-md-2' style='width: 120px;'>
+                  <%= image_tag 'logo-ph.png' %>
+                </div>
+                <div class='col-md-10'>
+                  <h1><a href="/" style='color: white;'><%= config.website_name %></a></h1>
+                  <div style=''>
+                    <%= config.website_tag %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+      <% end %>
+
+      <% if content_for?(:nav_sub) %>
+        <%= yield_content :nav_sub %> 
+      
+      <% else %>
+        <%= partial "shared/navbar" %>
+
+      <% end %>
+
+      <div class="container">
+        <div class="row">
+          <%= partial "shared/contact_bar" %>
+        </div>
+      </div>
+      
+      <div class="container">
+        <div class="row">
+          <%= yield %>
+        </div>
+      </div>
+
+      <br/>
+      <br/>
+
+      <footer>
+        <%= partial "shared/about_footer" %>
+        <% if false %>
+          <div class="container">
+            <div class="row">
+              <div class='signoff'>
+                <%= config.website_copyright %>
+                <br/>
+                <a href="/privacy.html" title="" tooltip="">Privacy Policy</a>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </footer>
+    </div>
+
+    <%= config.olark_code %>
+  </body>
+
+  <% js_path = sitemap.resources.select { |p| p.source_file.match(/all[.]js$/) }.first %>
+  <script type='text/javascript'>
+    <%= js_path.render %>
+  </script>
+
+  <%= config.adroll_code %>
+
+  <%= config.analytics_code %>  
+</html>
+

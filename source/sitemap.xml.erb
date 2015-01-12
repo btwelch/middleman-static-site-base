@@ -1,0 +1,17 @@
+<% pages = sitemap.resources.find_all{|p| p.source_file.match(/\.html/) } %>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<% pages.sort!{|a, b| b.data.priority.to_f <=> a.data.priority.to_f } %>
+
+<% pages.each do |page| %>
+  <% if !page.data.sitemap_exclude %>
+  <url>
+    <loc><%= website_url_with_protocol %><%=page.destination_path.gsub('/index.html','')%></loc>
+    <lastmod><%= Date.today.to_time.iso8601 %></lastmod>
+    <priority><%= page.data.priority || "0.5" %></priority>
+    <changefreq><%= page.data.changefreq || "monthly" %></changefreq>
+  </url>
+  <% end %>
+<% end %>
+</urlset>

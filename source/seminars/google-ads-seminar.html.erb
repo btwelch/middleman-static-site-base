@@ -1,0 +1,53 @@
+---
+changefreq: "weekly"
+priority: 0.6
+menu_title: "Google Ads Seminar"
+sitemap_exclude: false
+---
+
+<% content_for :page_title do %>
+  Google Ads Seminar | <%= config.website_name %>
+<% end %>
+
+<div>
+  <h1>
+    Google Ads Seminar
+  </h1>
+
+  <div>
+    <hr>
+    <h2>
+      "Where can I learn more about successfully implementing Google ads for my business? How can I ensure a profitable ad-spend?"
+    </h2>
+
+    <br/>
+
+    <p>
+      Come join us for a 2-hour class (held every few months) to explore the basic concepts behind Google advertising and how to get the most out of your advertising dollars. Hosted by our very own <%= config.your_name %>. Get on the list and register for the next class.
+    </p>
+
+    <br/>
+
+    <h2>Next Class</h2>
+
+    <br/>
+
+  	<% event = get_upcoming_event_details_for_type(CustomHelpers.EVENT_TYPE_GOOGLE_ADS_SEMINAR) %>
+
+    <% if event && event[:start_date] %>
+      <p>    
+        <%= partial "event_details", :locals => { :event => event } %>
+      </p>
+
+      <br/>
+
+      <p>    
+        <%= partial "event_registration", :locals => { :event => event } %>
+      </p>
+    <% else %>
+      <p>
+        No classes scheduled
+      </p>
+    <% end %>
+  </div>
+</div>

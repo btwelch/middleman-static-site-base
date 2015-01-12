@@ -1,0 +1,34 @@
+
+<div itemscope itemtype="http://schema.org/Event">
+  <a itemprop="url" href="<%= event[:class_url] %>">
+    <span itemprop="name">
+      <h2>
+        <%= event[:class_name] %>
+      </h2>
+    </span>
+  </a>
+  <div>
+    <%= event[:class_description] %>
+  </div>
+  <div>
+    <meta itemprop="startDate" content="<%= event[:start_date].strftime("%Y-%m-%dT%H:%M") %>">
+    <%= event[:start_date].strftime("%A, %B %e, %Y") %>
+    <br/>
+    <%= event[:start_date].strftime("%l:%M%p") %>
+  </div>
+  <div itemprop="location" itemscope itemtype="http://schema.org/Place">
+    Venue:
+    <a itemprop="url" href="<%= event[:class_location][:url] %>">
+      <%= event[:class_location][:name] %>
+    </a>
+    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+      <span itemprop="addressLocality"><%= event[:class_location][:city] %></span>,
+      <span itemprop="addressRegion"><%= event[:class_location][:state] %></span>
+    </div>
+  </div>
+  <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+    Priced from: <span itemprop="lowPrice">$<%= event[:ticket][:low_price] %></span>
+    <br/>
+    <span itemprop="offerCount"><%= event[:ticket][:remaining_spaces] %></span> spaces remain
+  </div>
+</div>

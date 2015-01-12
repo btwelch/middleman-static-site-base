@@ -1,0 +1,158 @@
+---
+changefreq: "weekly"
+priority: 1.0
+menu_title: "Home"
+sitemap_exclude: false
+---
+
+<% content_for :page_title do %>
+  <%= config.website_name %>
+<% end %>
+
+<!--
+<div id="videoContainer" style="position:absolute;left:0;top:0;z-index:-9!important; overflow:hidden;width:100%;height:100%;opacity:0;filter: alpha(opacity=0);">
+  <video id="backgroundVideo" autoplay preload style="width:100%; position:absolute; top:0;left:0;z-index:-998!important;opacity:1;" type="" src=""></video>
+  <video id="stagingVideo" autoplay preload style="width:100%; position:absolute; top:0;left:0; opacity:0; z-index:-999!important" type="" src=""></video>
+</div>-->
+
+<header style='background-color: #444; opacity: 0.7;'>
+  <div class='container'>
+    <div class='row'>
+
+      <div class='col-md-12'>
+        <div class='col-md-2' style='width: 120px;'>
+          <%= image_tag 'logo-ph.png' %>
+        </div>
+        <div class='col-md-10'>
+          <h1 style='margin-top: 15px; margin-bottom: 5px;'><a href="/" style='color: white;'><%= config.website_name %></a></h1>
+          <div style='color: white;'>
+            <%= config.website_tag %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<div style='background-color: #10476a;'>
+<div class='container' style='padding: 20px; border-radius: 0px;'>
+  <div class='row'>
+    <div class='col-md-12' style='color: white; margin-top:0px; padding-top: 0px;'>
+      <h2 style='margin-top: 10px; margin-bottom: 10px;'>"CTO as a Service" for Non-Technical Entrepreneurs</h2>
+
+      <br/>
+
+      <p>
+        Hi, I'm <%= config.your_name %>, the person you need to talk to about your software projects and business automation problems. If you need to solve real business problems and avoid wasting time and money on bad solutions, then I can help you move closer to where you need to be.
+      </p>
+
+      <br/>
+      
+      <p>
+        Ambitious companies (and determined individuals) come to me to help them build SaaS businesses, improve their SEO rankings, expand into mobile technology (iOS, Ansdroid, and Windows Mobile), and get advice about operating a businesss against the backdrop of massive technological changes.
+      </p>
+      
+      <br/>
+
+      <div style='text-align: center; padding: 20px; background-color: #ccc; color: #333; border-radius: 0px;'>
+        <blockquote>
+          <em>"You're probably the best engineer I've ever worked with."</em>
+        </blockquote>
+        <div>
+          (Real quote from a happy, anonymous client)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+</div>
+
+<div class='container' style='background-color:; opacity: 0.8; padding: 20px; margin-top: 0px; border-radius: 20px;'>
+  <div class='row'>
+    <div class='col-md-12' style='color: black; margin-top:0px; padding-top: 0px;'>
+
+      <h2>What I Do</h2>
+
+      <br/>
+
+      <p>
+        I use best-of-breed modern technologies to quickly alleviate your headaches, and when I'm not doing that, I'm using your preferrerd technologies to rescue your ailing projects from the wastebin. As one of my favorite clients puts it "You spend time worrying about the complicated stuff, so I don't have to. I like that a lot."
+      </p>
+
+      <br/>
+
+      <div style='text-align: center; padding: 20px; background-color: #ccc;'>
+        <blockquote>
+          <em>"Why is it that you can get this done so fast, when everyone else I work with will take weeks to do the same thing?"</em>
+        </blockquote>
+        <div>
+        </div>
+      </div>
+
+      <br/>
+
+      <p>
+        So, if you have business needs that you think technology might be able to solve, or if you have new projects that you want to start, or even projects that you need to rescue from failure, give me a call and we'll sort it out together. In simpler terms...
+      </p>
+
+      <br/>
+
+      <ul>
+        <li>
+          Got an app idea?
+        </li>
+        <li>
+          Got a website idea?
+        </li>
+        <li>
+          Want to talk about clever ways to incorporate technology in your business processes?
+        </li>
+        <li>
+          Need a nice website design? (I use themes for cost-effectiveness)
+        </li>
+        <li>
+          Need someone to just build it all for you?
+        </li>
+      </ul>
+
+      <br/>
+            
+      <h3>Call anytime at: <%= config.business_phone %></h3>
+      or email: <%= config.business_email %>.
+
+      <br/>
+
+    </div>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+<% content_for :video_settings do %>
+  <script>
+  //If desktop, throw the video and start playing
+  if(!window.oldInternetExplorer) {
+    var Video = new Video();
+    $(document).ready(function() {
+      if ( $("#videoContainer").is(":visible") ) {
+        Video.clips = [
+          ['bike', 9900],
+          ['kidshouse', 3900]
+        ];
+
+        if($('.title-shape').css('display') !== 'none') {
+          Video.throwFullScreen();
+          Video.buildInitialVideo();
+        }
+      }
+    });
+  }
+  </script>
+<% end %>
+
+
+
+

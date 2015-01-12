@@ -1,0 +1,54 @@
+<nav class="navbar navbar-inverse" role="navigation">
+	<div class="container-fluid"  style='margin: 3px auto;'>
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+		    	<span class="icon-bar"></span>
+		    	<span class="icon-bar"></span>
+		    	<span class="icon-bar"></span>
+		  	</button>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+   		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      		<ul class="nav navbar-nav">
+	        	<li>
+              <a href="/" title="<%= website_name %>" tooltip="Home">
+                <%= image_tag 'logo-ph.png', :style => "height: 20px;" %> <%= website_name %>
+              </a>
+            </li>
+
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
+	
+		          <ul class="dropdown-menu">
+  		          <li class="dropdown-submenu">
+  			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Design <b class="caret"></b></a>
+  			          <ul class="dropdown-menu">
+  		      			  <%= render_nav_menu_options("source/services/design", "") %>
+  			          </ul>
+  			        </li>
+                <li class="dropdown-submenu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">SEO <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <%= render_nav_menu_options("source/services/seo", "") %>
+                  </ul>
+                </li>      
+
+	      			  <%= render_nav_menu_options("source/services", "") %>
+		          </ul>
+	
+		        </li>      		
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Seminars <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              <%= render_nav_menu_options("source/seminars", "") %>
+              </ul>
+            </li>  
+      		</ul>
+
+    	</div>
+  	</div>
+</nav>
