@@ -4,12 +4,12 @@ Base is a starter-site for building Middleman-based web pages. It is pre-configu
 * Baked-in sitemap for SEO. 
 * Metadata controls
 
----
+Example metadata page header:
+
 changefreq: "weekly"
 priority: 1.0
 menu_title: "Home"
 sitemap_exclude: false
----
 
 changefreq - Added to the sitemap as the change frequency for the page. Recommend 'weekly' or 'monthly' unless your pages are updated all the time.
 
